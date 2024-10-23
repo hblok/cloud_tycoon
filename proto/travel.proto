@@ -3,9 +3,9 @@ syntax = "proto3";
 //import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 
-package server;
+package cloudtycoon.proto;
 
-option java_package = "server";
+option java_package = "com.github.hblok.cloudtycoon.proto";
 option java_multiple_files = true;
 
 

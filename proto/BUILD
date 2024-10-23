@@ -20,7 +20,7 @@ js_grpc_web_compile(
 java_proto_library(
      name = "travel_java_proto",
      deps = [":travel_proto"],
-     visibility = ["//server:__pkg__"],
+     visibility = ["//src/main/java:__pkg__"],
 )
 
 java_grpc_library(
@@ -31,5 +31,5 @@ java_grpc_library(
       # Compatibility issue with older Java versions.
       "@maven//:javax_annotation_javax_annotation_api_1_3_2",
     ],
-    visibility = ["//server:__pkg__"],
+    visibility = ["//src/main/java:__pkg__"],
 )
