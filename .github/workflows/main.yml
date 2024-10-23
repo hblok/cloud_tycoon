@@ -23,17 +23,12 @@ jobs:
           path: "~/.cache/bazel"
           key: bazel
         
-      - name: List
-        run: |
-            ls ${{ github.workspace }}
-            cat /etc/issue
-
       - name: Build
         run: bazel build ...
 
       - name: Publish images
         env:
-	  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
 	    echo "$GH_TOKEN" | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
 	    bazel run //docker:push_envoy_proxy_github
