@@ -13,6 +13,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    permissions:
+      packages: write
+      contents: read
+      attestations: write
+      id-token: write
+
     steps:
       - uses: actions/checkout@v4
       - uses: bazelbuild/setup-bazelisk@v3
@@ -30,5 +36,5 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-            echo "$GH_TOKEN" | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
+            echo $GH_TOKEN | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
             bazel run //docker:push_envoy_proxy_github
