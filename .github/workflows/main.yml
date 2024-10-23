@@ -32,4 +32,8 @@ jobs:
         run: bazel build ...
 
       - name: Publish images
-        run: bazel run //docker:push_envoy_proxy_github
+        env:
+	  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+	    echo "$GH_TOKEN" | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
+	    bazel run //docker:push_envoy_proxy_github
