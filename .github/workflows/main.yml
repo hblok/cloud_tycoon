@@ -28,4 +28,8 @@ jobs:
             ls ${{ github.workspace }}
             cat /etc/issue
 
-      - run: bazel build ...
+      - name: Build
+        run: bazel build ...
+
+      - name: Publish images
+        run: bazel run //docker:push_envoy_proxy_github

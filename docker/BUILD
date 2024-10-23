@@ -20,7 +20,7 @@ oci_push(
    name = "push_travel_server_github",
    image = ":travel_server_image",
    remote_tags = ["latest"],
-   repository = "ghcr.io/hblok/travel_server",
+   repository = "ghcr.io/hblok/ct_travel_server",
 )
 
 
@@ -42,7 +42,7 @@ oci_push(
     name = "push_nginx_web_github",
     image = ":nginx_web_image",
     remote_tags = ["latest"],
-    repository = "ghcr.io/hblok/nginx_web",
+    repository = "ghcr.io/hblok/ct_nginx_web",
 )
 
 
@@ -64,5 +64,5 @@ oci_push(
     name = "push_envoy_proxy_github",
     image = ":envoy_proxy_image",
     remote_tags = ["v1.32"],
-    repository = "ghcr.io/hblok/envoy_distroless",
+    repository = "ghcr.io/hblok/ct_envoy_distroless",
 )    
