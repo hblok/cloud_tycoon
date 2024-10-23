@@ -1,0 +1,101 @@
+syntax = "proto3";
+
+//import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+package server;
+
+option java_package = "server";
+option java_multiple_files = true;
+
+
+service Agent {
+
+    rpc ping(ClientInfo) returns (ServerInfo) {}
+    
+    rpc serverInfo(ClientInfo) returns (ServerInfo) {}
+
+    rpc airportInfo(ClientInfo) returns (Airport) {}
+
+    rpc addPackage(Package) returns (PackageTag) {}
+
+    rpc depart(Plane) returns (DepartResponse) {}
+
+    rpc arrive(Plane) returns (ArriveResponse) {}
+}
+
+message MessageId {
+    string id = 1;
+    google.protobuf.Timestamp time = 2;
+}
+
+message Browser {
+    string name = 1;
+    string version = 2;
+}
+
+message User {
+    string name = 1;
+}
+
+message ClientInfo {
+    MessageId mid = 1;
+    Browser browser = 2;
+
+    User user = 3;
+    Airport airport = 4;
+}
+
+message Metrics {
+    map<string, float> metrics = 1;
+}
+
+message ServerInfo {
+    MessageId mid = 1;	
+
+    string hostname = 2;
+    string ip = 3;
+    string cloud = 4;
+
+    Metrics metrics = 10;
+}
+
+message Package {
+    MessageId mid = 1;
+
+    string from = 2;
+    string to = 3;
+    string msg = 4;
+
+
+    //Route route = 30;
+}
+
+message PackageTag {
+}
+
+//message Route {
+//    repeated Airport visited = 1;
+//    //ttl
+//}
+
+message Airport {
+    string id = 1;
+    string name = 2;
+    string city = 3;
+    // id?
+    // planes?
+    // users?
+}
+
+message Plane {
+    Airport deport = 1;
+    Airport destination = 2;
+    repeated Package packages = 3;
+}
+
+message DepartResponse {
+}
+
+message ArriveResponse {
+}
