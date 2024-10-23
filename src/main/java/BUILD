@@ -3,7 +3,6 @@ load("@aspect_bazel_lib//lib:tar.bzl", "tar")
 java_binary(
     name = "TravelServer",
     srcs = ["com/github/hblok/cloudtycoon/TravelServer.java"],
-#    main_class = "server.TravelServer",
     deps = [
        "//proto:travel_java_grpc",
        "//proto:travel_java_proto",
@@ -16,8 +15,8 @@ java_binary(
     visibility = ["//src/test/java:__pkg__"]    
 )
 
-#tar(
-#    name = "travel_server_layer",
-#    srcs = ["//server:TravelServer_deploy.jar"],
-#    visibility = ["//docker:__pkg__"]
-#)
+tar(
+    name = "travel_server_layer",
+    srcs = [":TravelServer_deploy.jar"],
+    visibility = ["//docker:__pkg__"]
+)
