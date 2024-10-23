@@ -11,6 +11,8 @@ A full stack web client to distributed cloud deployed example application masque
 - grpc-web transport
 - Protocol Buffers message and gRPC service
 - Bazel build
+- Java tests
+- Mocha JavaScript tests
 - NPM transpiling and Rollup
 - Docker containerization
 - Kubernetes orchestration

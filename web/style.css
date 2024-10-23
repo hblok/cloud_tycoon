@@ -1,0 +1,28 @@
+#map {
+    display: inline;
+}
+
+#infoTable {
+    display: inline;
+    margin-left: 270px;
+
+    vertical-align: top;
+}
+
+#infoTable table {
+    display: inline;
+}
+
+#infoTable td {
+    border-style: dashed;
+    border-width: thin;
+}
+
+#infoTable .key {
+    padding-left: 4px;
+    padding-right: 1em;
+}
+
+#infoTable .value {
+    padding-left: 4px;
+}

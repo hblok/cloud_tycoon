@@ -1,0 +1,31 @@
+{
+  "name": "menu",
+  "type": "module",
+  "directories": {
+    "lib": ".",
+    "test": "."
+  },
+  "devDependencies": {
+    "mocha": "latest"
+  },
+  "dependencies": {
+    "@svgdotjs/svg.js": "^3.2.4",
+    "jquery": "^3.7.1",
+    "jsdom": "^25.0.0"
+  },
+  "mocha": {
+    "ui": "tdd",
+    "reporter": "list",
+    "globals": [
+      "$",
+      "window",
+      "document"
+    ]
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "scripts": {
+    "test": "mocha *test.js"
+  }
+}
