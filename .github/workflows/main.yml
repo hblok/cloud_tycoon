@@ -39,5 +39,5 @@ jobs:
       - name: Build
         run: bazel build ...
 
-      - name: Publish images
+      - name: Publish Docker images to Github
         run: bazel run //docker:push_envoy_proxy_github

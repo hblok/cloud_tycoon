@@ -1,4 +1,5 @@
 load("@rules_oci//oci:defs.bzl", "oci_image", "oci_push", "oci_load")
+load("@rules_multirun//:defs.bzl", "command", "multirun")
 
 
 ## TravelServer (gRPC server)
@@ -66,3 +67,15 @@ oci_push(
     remote_tags = ["v1.32"],
     repository = "ghcr.io/hblok/ct_envoy_distroless",
 )    
+
+
+## Push all Github
+
+multirun(
+    name = "push_all_github",
+    commands = [
+        "push_travel_server_github",
+        "push_nginx_web_github",
+        "push_envoy_proxy_github",
+   ]
+)

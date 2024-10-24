@@ -15,6 +15,15 @@ aspect_bazel_lib_dependencies()
 aspect_bazel_lib_register_toolchains()
 
 
+## Multirun
+
+http_archive(
+    name = "rules_multirun",
+    sha256 = "0e124567fa85287874eff33a791c3bbdcc5343329a56faa828ef624380d4607c",
+    url = "https://github.com/keith/rules_multirun/releases/download/0.9.0/rules_multirun.0.9.0.tar.gz",
+)
+
+
 ## GRPC
 
 proto_grpc_version = "4.6.0"
