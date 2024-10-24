@@ -40,4 +40,4 @@ jobs:
         run: bazel build ...
 
       - name: Publish Docker images to Github
-        run: bazel run //docker:push_envoy_proxy_github
+        run: bazel run //docker:push_all_github
