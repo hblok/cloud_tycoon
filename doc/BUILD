@@ -3,5 +3,6 @@ py_test(
     srcs = ["diagram_api_test.py"],
     deps = [
         "@pip_diagrams//:pkg"
-    ]
+    ],
+    size = "small",
 )
