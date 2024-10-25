@@ -30,7 +30,7 @@ jobs:
           key: bazel
         
       - name: Build
-        run: bazel test --sandbox_debug ...
+        run: bazel test --sandbox_debug --test_output all ...
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
