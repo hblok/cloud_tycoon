@@ -107,6 +107,28 @@ http_archive(
 )
 
 
+## Pip / Python
+
+rules_python_version = "0.37.1"
+http_archive(
+    name = "rules_python",
+    sha256 = "bd4797821b72b80b69e3c5ab4ad037e7fd1e6a0a27aebf42424c7ab0ce32e254",
+    strip_prefix = "rules_python-{}".format(rules_python_version),
+    url = "https://github.com/bazelbuild/rules_python/archive/refs/tags/{}.tar.gz".format(rules_python_version),
+)
+load("@rules_python//python:repositories.bzl", "py_repositories")
+py_repositories()
+
+load("@rules_python//python:pip.bzl", "pip_parse")
+
+pip_parse(
+    name = "pip",
+    requirements_lock = "//:requirements_lock.txt",
+)
+
+load("@pip//:requirements.bzl", "install_deps")
+install_deps()
+
 
 # Docker
 
