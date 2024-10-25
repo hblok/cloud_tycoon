@@ -90,6 +90,7 @@ artifacts = [
 	"io.grpc:grpc-netty-shaded:1.68.0",
         "javax.annotation:javax.annotation-api:1.3.2",
         "org.apache.tomcat:annotations-api:6.0.13",
+	"org.easymock:easymock:5.4.0",
 
     ],
     repositories = [

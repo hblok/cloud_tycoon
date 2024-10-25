@@ -9,7 +9,7 @@ import com.github.hblok.cloudtycoon.proto.ClientInfo;
 import com.github.hblok.cloudtycoon.proto.ServerInfo;
 
 
-class AgentService  extends AgentGrpc.AgentImplBase {
+class AgentService extends AgentGrpc.AgentImplBase {
     
     public void ping(ClientInfo request,
 		     StreamObserver<ServerInfo> responseObserver) {
