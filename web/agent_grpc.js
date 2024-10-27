@@ -23,7 +23,6 @@ class Agent {
 
     pingServer() {
 	const request = new travel_pb.ClientInfo();
-	request.setName(name);
 
 	this.#client.ping(request, {}, (err, response) => {
 	    if (err) {
@@ -40,11 +39,14 @@ class Agent {
 
     getServerInfo(cityName, callBack) {
 	const request = new travel_pb.ClientInfo();
-	request.setCity(cityName);
+	const messageId = new travel_pb.MessageId();
+	const airport = new travel_pb.Airport();
+	airport.setCity(cityName);
+	request.setAirport(airport);
 
 	const timestamp = new proto.google.protobuf.Timestamp([this.epoch_seconds()]);
-	//console.log("r: ", timestamp.getSeconds()); //, timestamp.toLocalString());
-	request.setTime(timestamp);
+	messageId.setTime(timestamp);
+	request.setMid(messageId);
 
 	this.sendRequest("serverInfo", request, callBack);
     }

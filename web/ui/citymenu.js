@@ -56,9 +56,9 @@ class CityMenu extends Menu {
 	this.setInfo("server", serverInfo.getHostname());
 	this.setInfo("ip", serverInfo.getIp());
 	this.setInfo("cloud", serverInfo.getCloud());
-	this.setInfo("load", serverInfo.getLoad());
-	this.setInfo("ram", serverInfo.getRam());
-	this.setInfo("time", serverInfo.getTime().toDate().toTimeString());
+	this.setInfo("load", serverInfo.getMetrics().getMetricsMap()["load"]);
+	this.setInfo("ram", serverInfo.getMetrics().getMetricsMap()["ram"]);
+	this.setInfo("time", serverInfo.getMid().getTime().toDate().toTimeString());
     }
 
     setInfo(cellId, value) {

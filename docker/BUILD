@@ -7,7 +7,7 @@ load("@rules_multirun//:defs.bzl", "command", "multirun")
 oci_image(
     name = "travel_server_image",
     base = "@distroless_java",
-    entrypoint = ["/usr/bin/java", "-jar", "/com/github/hblok/cloudtycoon/TravelServer_deploy.jar"],
+    entrypoint = ["/usr/bin/java", "-jar", "/src/main/java/TravelServer_deploy.jar"],
     tars = ["//src/main/java:travel_server_layer"],
 )
 
