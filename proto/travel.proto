@@ -47,7 +47,7 @@ message ClientInfo {
 }
 
 message Metrics {
-    map<string, float> metrics = 1;
+    map<string, double> metrics = 1;
 }
 
 message ServerInfo {

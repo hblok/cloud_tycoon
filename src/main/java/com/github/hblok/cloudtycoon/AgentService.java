@@ -1,5 +1,7 @@
 package com.github.hblok.cloudtycoon;
 
+import java.util.UUID;
+
 import com.google.protobuf.Timestamp;
 import com.google.protobuf.util.Timestamps;
 import io.grpc.stub.StreamObserver;
@@ -16,8 +18,18 @@ import com.github.hblok.cloudtycoon.proto.PackageTag;
 import com.github.hblok.cloudtycoon.proto.Plane;
 import com.github.hblok.cloudtycoon.proto.ServerInfo;
 
+import com.github.hblok.cloudtycoon.SystemInfo;
+
 
 class AgentService extends AgentGrpc.AgentImplBase {
+
+    SystemInfo sysInfo;
+
+    AgentService() {
+	sysInfo = new SystemInfo();
+	sysInfo.init();
+	
+    }
     
     public void ping(ClientInfo request,
 		     StreamObserver<ServerInfo> responseObserver) {
@@ -33,28 +45,15 @@ class AgentService extends AgentGrpc.AgentImplBase {
     public void serverInfo(ClientInfo request,
 			   StreamObserver<ServerInfo> responseObserver) {
 	String city = request.getAirport().getCity();
-	print("serverinfo city=" + city + ", time=" + request.getMid().getTime().getSeconds() + " " + Timestamps.toString(request.getMid().getTime()));
+	print("serverinfo city=" + city + ", " + Timestamps.toString(request.getMid().getTime()));
 
-	long millis = System.currentTimeMillis();
-	Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000).build();
-
-	MessageId mid = MessageId
-	    .newBuilder()
-	    .setTime(timestamp)
-	    .build();
-
-	Metrics metrics = Metrics
-	    .newBuilder()
-	    .putMetrics("load", 1)
-	    .build();
-	
 	ServerInfo response = ServerInfo
 	    .newBuilder()
 	    .setHostname(city)
 	    .setIp("1.2.3.4")
 	    .setCloud("amazon")
-	    .setMid(mid)
-	    .setMetrics(metrics)
+	    .setMid(getNewMessageId())
+	    .setMetrics(sysInfo.getMetrics())
 	    .build();
 	responseObserver.onNext(response);
 	responseObserver.onCompleted();
@@ -74,7 +73,18 @@ class AgentService extends AgentGrpc.AgentImplBase {
 
     public void arrive(Plane request,
 		       StreamObserver<ArriveResponse> responseObserver) {
-    }        
+    }
+
+    private MessageId getNewMessageId() {
+	long millis = System.currentTimeMillis();
+	Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000).build();
+
+	return MessageId
+	    .newBuilder()
+	    .setId(UUID.randomUUID().toString())
+	    .setTime(timestamp)
+	    .build();
+    }
 
     private void print(String str) {
 	System.out.println(str);
