@@ -18,16 +18,21 @@ import com.github.hblok.cloudtycoon.proto.PackageTag;
 import com.github.hblok.cloudtycoon.proto.Plane;
 import com.github.hblok.cloudtycoon.proto.ServerInfo;
 
-import com.github.hblok.cloudtycoon.SystemInfo;
+import com.github.hblok.cloudtycoon.env.SystemInfo;
+import com.github.hblok.cloudtycoon.env.CloudInfo;
 
 
 class AgentService extends AgentGrpc.AgentImplBase {
 
     SystemInfo sysInfo;
+    CloudInfo cloudInfo;
 
     AgentService() {
 	sysInfo = new SystemInfo();
 	sysInfo.init();
+
+	cloudInfo = new CloudInfo();
+	print("cloud: " + cloudInfo.getPlatformName());
 	
     }
     

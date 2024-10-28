@@ -17,5 +17,22 @@ A full stack web client to distributed cloud deployed example application masque
 - Docker containerization
 - Kubernetes orchestration
 - Amazon AWS EC2
-- Amazon Elastic Container Service
 - Azure Cloud Services
+
+## Architecture
+
+TODO
+
+## Requirements
+
+The following requirements and limitations exists:
+
+- Latest Debian or Ubuntu OS version.
+- Python 3.11 (known issue in 3.12)
+- Bazel 7 (or latest)
+- Specific Bazel library dependencies (see [WORKSPACE](WORKSPACE))
+- Plain /tmp directory (or use `--noincompatible_sandbox_hermetic_tmp` with bazel)
+
+## Running
+
+TODO
