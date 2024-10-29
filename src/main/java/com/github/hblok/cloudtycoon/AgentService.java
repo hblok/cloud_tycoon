@@ -20,12 +20,14 @@ import com.github.hblok.cloudtycoon.proto.ServerInfo;
 
 import com.github.hblok.cloudtycoon.env.SystemInfo;
 import com.github.hblok.cloudtycoon.env.CloudInfo;
+import com.github.hblok.cloudtycoon.env.ExternalIp;
 
 
 class AgentService extends AgentGrpc.AgentImplBase {
 
     SystemInfo sysInfo;
     CloudInfo cloudInfo;
+    ExternalIp externalIp;
 
     AgentService() {
 	sysInfo = new SystemInfo();
@@ -33,7 +35,9 @@ class AgentService extends AgentGrpc.AgentImplBase {
 
 	cloudInfo = new CloudInfo();
 	print("cloud: " + cloudInfo.getPlatformName());
-	
+
+	externalIp = new ExternalIp();
+	print("ip: " + externalIp.getIp());
     }
     
     public void ping(ClientInfo request,
@@ -55,8 +59,8 @@ class AgentService extends AgentGrpc.AgentImplBase {
 	ServerInfo response = ServerInfo
 	    .newBuilder()
 	    .setHostname(city)
-	    .setIp("1.2.3.4")
-	    .setCloud("amazon")
+	    .setIp(externalIp.getIp())
+	    .setCloud(cloudInfo.getPlatformName())
 	    .setMid(getNewMessageId())
 	    .setMetrics(sysInfo.getMetrics())
 	    .build();

@@ -19,3 +19,31 @@ java_test(
     ],
     size = "small",
 )
+
+
+java_test(
+    name = "CloudInfoTest",
+    srcs = ["com/github/hblok/cloudtycoon/env/CloudInfoTest.java"],
+    deps = [
+        "//src/main/java:env"
+    ],
+    size = "small",
+)
+
+java_test(
+    name = "ExternalIpTest",
+    srcs = ["com/github/hblok/cloudtycoon/env/ExternalIpTest.java"],
+    deps = [
+        "//src/main/java:env"
+    ],
+    size = "small",
+)
+
+java_test(
+    name = "SystemInfoTest",
+    srcs = ["com/github/hblok/cloudtycoon/env/SystemInfoTest.java"],
+    deps = [
+        "//src/main/java:env"
+    ],
+    size = "small",
+)
