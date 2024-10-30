@@ -12,15 +12,21 @@ from diagrams.onprem import client
 class AwsDiagram:
 
     def gen(self, show):
-        with diagrams.Diagram(show=show, direction="TB"):
+        graph_attr = {
+            "fontsize": "20",
+            "bgcolor": "transparent"
+        }
+        
+        with diagrams.Diagram(show=show, direction="LR",
+                              graph_attr=graph_attr):
             
             with diagrams.Cluster("Docker stack"):
-                proxy = connectivity.Backbone("Envoy proxy")
+                proxy = connectivity.Backbone("Envoy proxy", height="2")
                 proxy >> [
-                    compute.Container("Java grpc"),
-                    compute.Container("web nginx")]
+                    compute.Container("Java grpc", height="0.6"),
+                    compute.Container("web nginx", height="0.6")]
 
-            client.User() >> proxy
+            client.User(height="0.9") >> proxy
 
 
 def main():
