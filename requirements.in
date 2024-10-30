@@ -1,1 +1,2 @@
 diagrams
+boto3==1.35.24
