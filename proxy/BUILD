@@ -1,4 +1,4 @@
-load("@aspect_bazel_lib2//lib:tar.bzl", "tar", "mtree_spec", "mtree_mutate")
+load("@aspect_bazel_lib2//lib:tar.bzl", "mtree_mutate", "mtree_spec", "tar")
 
 _TAR_SRCS = ["envoy.yaml"]
 
@@ -10,13 +10,13 @@ mtree_spec(
 mtree_mutate(
     name = "add_path",
     mtree = ":mtree",
+    package_dir = "etc/envoy",
     strip_prefix = "proxy",
-    package_dir = "etc/envoy"
 )
 
 tar(
     name = "envoy_proxy_layer",
     srcs = _TAR_SRCS,
     mtree = "add_path",
-    visibility = ["//docker:__pkg__"]
+    visibility = ["//docker:__pkg__"],
 )

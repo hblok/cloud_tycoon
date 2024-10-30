@@ -4,10 +4,10 @@ filegroup(
     name = "static_web",
     srcs = [
         "citymenu.js",
+        "info_table.html",
         "main.js",
         "menu.js",
         "svg_map.js",
-	"info_table.html",
     ],
     visibility = ["//web:__pkg__"],
 )
@@ -24,17 +24,18 @@ TEST_DEPS = [
 
 mocha_test(
     name = "menu_test",
-    srcs = ["menu.js"] + TEST_DEPS
+    srcs = ["menu.js"] + TEST_DEPS,
 )
 
 mocha_test(
     name = "citymenu_test",
     srcs = [
-      "citymenu.js",
-      "menu.js"] + TEST_DEPS
+        "citymenu.js",
+        "menu.js",
+    ] + TEST_DEPS,
 )
 
 mocha_test(
     name = "svg_api_test",
-    srcs = TEST_DEPS
+    srcs = TEST_DEPS,
 )

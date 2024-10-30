@@ -1,14 +1,17 @@
-load("@aspect_bazel_lib2//lib:tar.bzl", "tar", "mtree_spec", "mtree_mutate")
+load("@aspect_bazel_lib2//lib:tar.bzl", "mtree_mutate", "mtree_spec", "tar")
 
 filegroup(
     name = "static_web",
     srcs = [
+        "favicon.ico",
         "index.html",
-	"main.js",
-	"style.css",
-	"favicon.ico",
-    ] + glob(["gfx/*", "external/*"]),
-    visibility = ["//web/ui:__pkg__"]    
+        "main.js",
+        "style.css",
+    ] + glob([
+        "gfx/*",
+        "external/*",
+    ]),
+    visibility = ["//web/ui:__pkg__"],
 )
 
 # Makes "local" copies of the grpcweb outputs available so they can be
@@ -37,23 +40,20 @@ genrule(
         ":rollup.config.js",
         ":agent_grpc.js",
         ":travel_pb.js",
-	":travel_grpc_web_pb.js",
-	"@npm//google-protobuf",
-	"@npm//grpc-web",
-	"@npm//@rollup/plugin-commonjs",
-    ],
-    tools = [
-      "@npm//rollup/bin:rollup",
+        ":travel_grpc_web_pb.js",
+        "@npm//google-protobuf",
+        "@npm//grpc-web",
+        "@npm//@rollup/plugin-commonjs",
     ],
     outs = [
         "gen/agent_grpc.js",
-	"gen/travel_pb.js",
-	"gen/travel_grpc_web_pb.js",
-	"gen/google-protobuf.js",
-	"gen/empty_pb.js",
-	"gen/timestamp_pb.js",
-	"gen/index.js",
-	"gen/helpers.js",
+        "gen/travel_pb.js",
+        "gen/travel_grpc_web_pb.js",
+        "gen/google-protobuf.js",
+        "gen/empty_pb.js",
+        "gen/timestamp_pb.js",
+        "gen/index.js",
+        "gen/helpers.js",
     ],
     cmd = """
 	ln -sv bazel-out/k8-fastbuild/bin/external/npm/node_modules
@@ -86,9 +86,11 @@ genrule(
 	echo "-------------------"
 	tree $(@D)
     """,
-    visibility = ["//web/ui:__pkg__"]        
-    )
-
+    tools = [
+        "@npm//rollup/bin:rollup",
+    ],
+    visibility = ["//web/ui:__pkg__"],
+)
 
 _WEB_SERVER_DATA = [
     ":static_web",
@@ -98,19 +100,19 @@ _WEB_SERVER_DATA = [
 
 mtree_spec(
     name = "mtree",
-    srcs = _WEB_SERVER_DATA
+    srcs = _WEB_SERVER_DATA,
 )
 
 mtree_mutate(
     name = "add_nginx_path",
     mtree = ":mtree",
+    package_dir = "usr/share/nginx/html",
     strip_prefix = "web",
-    package_dir = "usr/share/nginx/html"
 )
 
 tar(
     name = "nginx_web_layer",
     srcs = _WEB_SERVER_DATA,
     mtree = "add_nginx_path",
-    visibility = ["//docker:__pkg__"]
+    visibility = ["//docker:__pkg__"],
 )
