@@ -23,6 +23,9 @@ A full stack web client to distributed cloud deployed example application masque
 
 TODO
 
+![docker stack](doc/docker_stack.png)
+
+
 ## Requirements
 
 The following requirements and limitations exists:

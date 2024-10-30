@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 import unittest
 
 import diagrams
@@ -11,6 +9,7 @@ from diagrams.aws import network
 class DiagramApiTest(unittest.TestCase):
 
     def test_diagrams(self):
+        print("test_diagrams")
         with diagrams.Diagram("Web Service", show=False):
             network.ELB("lb") >> compute.EC2("web") >> database.RDS("userdb")
 
