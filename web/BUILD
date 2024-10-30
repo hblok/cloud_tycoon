@@ -7,7 +7,8 @@ filegroup(
 	"main.js",
 	"style.css",
 	"favicon.ico",
-    ] + glob(["gfx/*", "external/*"])	
+    ] + glob(["gfx/*", "external/*"]),
+    visibility = ["//web/ui:__pkg__"]    
 )
 
 # Makes "local" copies of the grpcweb outputs available so they can be
@@ -84,7 +85,8 @@ genrule(
 	#tree -L 5 -d
 	echo "-------------------"
 	tree $(@D)
-    """
+    """,
+    visibility = ["//web/ui:__pkg__"]        
     )
 
 

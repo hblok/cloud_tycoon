@@ -1,30 +1,40 @@
-load(":mocha_test.bzl", "mocha_test")
+load(":custom_mocha_test.bzl", "mocha_test")
 
 filegroup(
-  name = "static_web",
-  srcs = glob(["*.js", "*.html"]),
-  visibility = ["//web:__pkg__"],
+    name = "static_web",
+    srcs = [
+        "citymenu.js",
+        "main.js",
+        "menu.js",
+        "svg_map.js",
+	"info_table.html",
+    ],
+    visibility = ["//web:__pkg__"],
 )
 
-sh_binary(
-  name = "mocha",
-  srcs = ["mocha.sh"],
+TEST_DEPS = [
+    "package.json",
+    "mock_jdom.js",
+    "mock_svg.js",
+    "@npm//assert",
+    "@npm//jsdom",
+    "@npm//jquery",
+    "@npm//@svgdotjs/svg.js",
+]
+
+mocha_test(
+    name = "menu_test",
+    srcs = ["menu.js"] + TEST_DEPS
 )
 
-# TODO
+mocha_test(
+    name = "citymenu_test",
+    srcs = [
+      "citymenu.js",
+      "menu.js"] + TEST_DEPS
+)
 
-# mocha_test(
-#   name = "citymenu_test",
-#   srcs = ["citymenu_test.js"],
-# )
-
-# mocha_test(
-#   name = "menu_test",
-#   srcs = ["menu_test.js"],
-# #  deps = ["@npm//:node_modules/jsdom"],
-# )
-
-# mocha_test(
-#   name = "svg_api_test",
-#   srcs = ["svg_api_test.js"],
-# )
+mocha_test(
+    name = "svg_api_test",
+    srcs = TEST_DEPS
+)

@@ -80,7 +80,7 @@ class Menu {
     }
 
     render() {
-	console.log("render(): ", this);
+	//console.log("render(): ", this);
 
 	let mouseSensor = this.grp.rect(this.width + 20, this.height + 20)
 	    .x(this.x - 10).y(this.y - 10).fill({color: "white", opacity: "0.01"});

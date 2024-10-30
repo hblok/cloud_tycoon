@@ -26,8 +26,6 @@ class SvgMap {
     }
 
     setupSvg(contents) {
-	console.log("setupSvg");
-	
 	let $tmp = $('svg', contents);
 	this.#mapSvg.svg($tmp.html());
 

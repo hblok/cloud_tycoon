@@ -1,8 +1,4 @@
 import { SVG } from "@svgdotjs/svg.js";
-//import { SVG } from "svg";
-
-//const svg = require("@svgdotjs/svg.js");
-//global.SVG = svg.SVG;
 
 //console.log(SVG);
 
