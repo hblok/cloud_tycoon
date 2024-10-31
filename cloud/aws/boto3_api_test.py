@@ -39,6 +39,10 @@ class Boto3ApiTest(unittest.TestCase):
     def skip_test_reboot_instance(self):
         ec2 = boto3.client('ec2')
         print(ec2.reboot_instances(InstanceIds=["i-1234567890abcdef5"]))
+
+    def test_cloudformation(self):
+        client = boto3.client("cloudformation")
+        print(client.list_stacks())
             
 
 if __name__ == "__main__":
