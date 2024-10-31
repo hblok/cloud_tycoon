@@ -3,6 +3,7 @@ py_binary(
     srcs = ["aws_diagram.py"],
     deps = [
         "@pip_diagrams//:pkg",
+	"@pip_absl_py//:pkg",
     ],
 )
 

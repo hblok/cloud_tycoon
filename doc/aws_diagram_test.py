@@ -5,8 +5,8 @@ from doc import aws_diagram
 
 class AwsDiagramTest(unittest.TestCase):
 
-    def test_gen(self):
-        aws_diagram.AwsDiagram().gen(False)
+    def test_docker(self):
+        aws_diagram.AwsDiagram(False).docker()
 
 
 if __name__ == "__main__":

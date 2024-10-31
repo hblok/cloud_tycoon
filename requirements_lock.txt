@@ -4,6 +4,10 @@
 #
 #    bazel run //:requirements.update
 #
+absl-py==2.1.0 \
+    --hash=sha256:526a04eadab8b4ee719ce68f204172ead1027549089702d99b9059f129ff1308 \
+    --hash=sha256:7820790efbb316739cde8b4e19357243fc3608a152024288513dd968d7d959ff
+    # via -r ./requirements.in
 boto3==1.35.24 \
     --hash=sha256:97fcc1a14cbc759e4ba9535ced703a99fcf652c9c4b8dfcd06f292c80551684b \
     --hash=sha256:be7807f30f26d6c0057e45cfd09dad5968e664488bf4f9138d0bb7a0f6d8ed40
