@@ -67,12 +67,22 @@ class CreateInstance:
 
         response = self.client.describe_instances(InstanceIds=[self.instance_id])
         print(response)
-        ip = response["Reservations"][0]["Instances"][0]["NetworkInterfaces"][0]["Association"]["PublicIp"]
-        print("Public IP: ", ip)
+        self.ip = response["Reservations"][0]["Instances"][0]["NetworkInterfaces"][0]["Association"]["PublicIp"]
+        print("Public IP: ", self.ip)
+
+        return self
+
+    def write_inventory(self):
+        lines = [
+            "[aws]",
+            self.ip]
+
+        with open("/tmp/inventory", "w") as f:
+            f.write("\n".join(lines))
 
               
 def main(_):
-    CreateInstance().create().status()
+    CreateInstance().create().status().write_inventory()
 
     
 if __name__ == "__main__":

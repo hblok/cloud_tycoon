@@ -16,8 +16,10 @@ A full stack web client to distributed cloud deployed example application masque
 - NPM transpiling and Rollup
 - Docker containerization
 - Kubernetes orchestration
+- Ansible provisioning
 - Amazon AWS EC2
 - Azure Cloud Services
+
 
 ## Architecture
 
