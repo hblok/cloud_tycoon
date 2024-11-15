@@ -2,7 +2,14 @@
 
 - name: Keyfile
   ansible.builtin.debug:
+    var: remote_user
+
+- name: Keyfile
+  ansible.builtin.debug:
     var: ansible_ssh_private_key_file
+
+- ansible.builtin.debug:
+    var: lookup("ansible.builtin.file", "{{ ansible_ssh_private_key_file }}")
 
 - name: Install required packages
   apt:
