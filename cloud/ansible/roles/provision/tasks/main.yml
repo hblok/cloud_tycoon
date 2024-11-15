@@ -1,0 +1,39 @@
+# Installs Docker and package dependencies.
+
+- name: Keyfile
+  ansible.builtin.debug:
+    var: ansible_ssh_private_key_file
+
+- name: Install required packages
+  apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+    state: latest
+    update_cache: true
+
+- name: Add Docker GPG apt Key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add Docker Repository
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu focal stable
+    state: present
+
+- name: Apt install
+  ansible.builtin.apt:
+    pkg:
+      - htop
+      - emacs-nox
+      - docker-ce
+    state: latest
+
+- name: Add user to docker group
+  ansible.builtin.user:
+    name: "{{ remote_user }}"
+    groups: docker
+    append: yes

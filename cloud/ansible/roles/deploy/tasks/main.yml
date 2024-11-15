@@ -1,0 +1,26 @@
+# Deploys and starts the Cloud Tycoon Docker stack.
+
+- name: mkdir travel
+  ansible.builtin.file:
+    path: /home/{{ remote_user }}/travel
+    state: directory
+ 
+- name: mkdir .docker
+  ansible.builtin.file:
+    path: /home/{{ remote_user }}/.docker
+    state: directory
+
+- name: Copy Docker conf
+  ansible.builtin.copy:
+    src: /docker_config.json
+    dest: ~/.docker/config.json
+
+- name: Copy compose
+  ansible.builtin.copy:
+    src: /docker-compose.yml
+    dest: ~/travel/docker-compose.yml
+
+- name: Start stack
+  community.docker.docker_compose_v2:
+    project_src: ~/travel
+    state: present
