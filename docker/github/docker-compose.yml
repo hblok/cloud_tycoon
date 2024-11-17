@@ -1,17 +1,17 @@
 services:
-  travel_grpc:
-    container_name: travel_grpc
+  travel-grpc:
+    container_name: travel-grpc
     image: "ghcr.io/hblok/ct_travel_server:latest"
     networks:
       - travel
       
-  nginx_web:
-    container_name: nginx_web
+  nginx-web:
+    container_name: nginx-web
     image: "ghcr.io/hblok/ct_nginx_web:latest"
     networks:
       - travel
       
-  envoy_proxy:
+  envoy-proxy:
     image: "ghcr.io/hblok/ct_envoy_distroless:v1.32"
     networks:
       - travel

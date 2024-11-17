@@ -1,25 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    kompose.cmd: kompose convert
-    kompose.version: 1.22.0 (955b78124)
-  creationTimestamp: null
-  labels:
-    io.kompose.service: travel-grpc
   name: travel-grpc
 spec:
   replicas: 1
   selector:
     matchLabels:
       io.kompose.service: travel-grpc
-  strategy: {}
   template:
     metadata:
-      annotations:
-        kompose.cmd: kompose convert
-        kompose.version: 1.22.0 (955b78124)
-      creationTimestamp: null
       labels:
         io.kompose.network/travel: "true"
         io.kompose.service: travel-grpc
@@ -27,8 +16,10 @@ spec:
       containers:
         - image: ghcr.io/hblok/ct_travel_server:latest
           name: travel-grpc
+          imagePullPolicy: Always
           resources: {}
       imagePullSecrets:
         - name: regcred
       restartPolicy: Always
+      hostname: travel-grpc
 status: {}

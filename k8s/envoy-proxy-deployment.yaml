@@ -1,11 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    kompose.cmd: kompose convert
-    kompose.service.type: LoadBalancer
-    kompose.version: 1.22.0 (955b78124)
-  creationTimestamp: null
   labels:
     io.kompose.service: envoy-proxy
   name: envoy-proxy
@@ -17,11 +12,6 @@ spec:
   strategy: {}
   template:
     metadata:
-      annotations:
-        kompose.cmd: kompose convert
-        kompose.service.type: LoadBalancer
-        kompose.version: 1.22.0 (955b78124)
-      creationTimestamp: null
       labels:
         io.kompose.network/travel: "true"
         io.kompose.service: envoy-proxy
@@ -29,11 +19,12 @@ spec:
       containers:
         - image: ghcr.io/hblok/ct_envoy_distroless:v1.32
           name: envoy-proxy
+          imagePullPolicy: Always
           ports:
             - containerPort: 12000
             - containerPort: 9901
           resources: {}
       imagePullSecrets:
-        - name: regcred	 
+        - name: regcred
       restartPolicy: Always
 status: {}

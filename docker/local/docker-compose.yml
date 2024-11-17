@@ -1,17 +1,17 @@
 services:
-  travel_grpc:
-    container_name: travel_grpc
+  travel-grpc:
+    container_name: travel-grpc
     image: "travel_server:latest"
     networks:
       - travel
       
-  nginx_web:
-    container_name: nginx_web
+  nginx-web:
+    container_name: nginx-web
     image: "nginx_web:latest"
     networks:
       - travel
       
-  envoy_proxy:
+  envoy-proxy:
     image: "envoy_distroless:v1.32"
     networks:
       - travel

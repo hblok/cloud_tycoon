@@ -21,6 +21,8 @@ public class CloudInfo {
 	    name = "Azure";
 	} else if (isBazel()) {
 	    name = "Bazel";
+	} else if (isKubernetes()) {
+	    name = "kubernetes";
 	} else {
 	    name = "local";
 	}
@@ -61,6 +63,17 @@ public class CloudInfo {
 	for (Map.Entry<?,?> e : System.getenv().entrySet()) {
 	    String key = e.getKey().toString();
 	    if (key == "TEST_SRCDIR" || key.contains("RUNFILES_")) {
+		return true;
+	    }
+	}
+
+	return false;
+    }
+
+    private boolean isKubernetes() {
+	for (Map.Entry<?,?> e : System.getenv().entrySet()) {
+	    String key = e.getKey().toString();
+	    if (key.contains("KUBERNETES_PORT_")) {
 		return true;
 	    }
 	}
