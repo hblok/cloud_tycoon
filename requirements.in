@@ -1,3 +1,7 @@
 diagrams
 absl-py
 boto3==1.35.24
+#grpcio==1.56.0
+cygrpc
+#google-cloud-compute
+
