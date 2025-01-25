@@ -5,4 +5,6 @@ entries:
       description: A full-stack web to cloud, web-grpc to Java distributed game.
       home: https://github.com/hblok/cloud_tycoon
       name: cloud-tycoon
+      version: 0.1.0
+      
       
