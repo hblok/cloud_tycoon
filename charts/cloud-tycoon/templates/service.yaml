@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cloud-tycoon
+  labels:
+    app: cloud-tycoon
+
+spec:
+  type: LoadBalancer
+  selector:
+    app: cloud-tycoon
+  ports:
+    - port: 12000
+      targetPort: 12000
+
+status:
+  loadBalancer: {}

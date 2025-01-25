@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloud-tycoon
+  labels:
+    app: cloud-tycoon
+  
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cloud-tycoon
+  template:
+    metadata:
+      labels:
+        app: cloud-tycoon
+    spec:
+      containers:
+        - image: ghcr.io/hblok/ct_envoy_distroless:v1.32
+          name: envoy-proxy
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 12000
+            - containerPort: 9901
+        - image: ghcr.io/hblok/ct_nginx_web:latest
+          name: nginx-web
+          imagePullPolicy: Always        
+        - image: ghcr.io/hblok/ct_travel_server:latest
+          name: travel-grpc
+          imagePullPolicy: Always
+      imagePullSecrets:
+        - name: regcred
+      restartPolicy: Always          
+
+status: {}
