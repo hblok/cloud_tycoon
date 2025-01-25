@@ -35,9 +35,18 @@ jobs:
           path: "~/.cache/bazel"
           key: bazel
 
-      - name: Install dependencies
-        run: apt policy python3; sudo apt-get install --allow-downgrades python3=3.11.2-1+b1
-        #sudo apt-get install -y graphviz
+      - name: Install Python 3.11
+        run: |
+          apt update
+          apt install -y software-properties-common
+          add-apt-repository ppa:deadsnakes/ppa
+          apt update
+          apt install python3.11 python3.11-dev
+          python3 --version
+
+#      - name: Install dependencies
+#        run: apt policy python3; sudo apt-get install --allow-downgrades python3=3.11.2-1+b1
+#        #sudo apt-get install -y graphviz
 
       - name: Print versions
         run: bazel --version; python3 --version
