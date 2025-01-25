@@ -36,6 +36,9 @@ jobs:
       - name: Install dependencies
         run: sudo apt-get install -y graphviz
 
+      - name: Bazel version
+        run: bazel --version
+
       - name: List rules
         run: bazel query ...
         
