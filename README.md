@@ -24,6 +24,7 @@ A full stack web client to distributed cloud deployed example application masque
 - Docker containerization
 - Ansible provisioning
 - Kubernetes orchestration
+- Helm repository and install
 
 **Cloud**
 - Amazon AWS EC2
@@ -44,10 +45,25 @@ The following requirements and limitations exists:
 
 - Latest Debian or Ubuntu OS version.
 - Python 3.11 (known issue in 3.12)
-- Bazel 7 (or latest)
+- Bazel 7 (8+ has started to deprecate WORKSPACE support)
 - Specific Bazel library dependencies (see [WORKSPACE](WORKSPACE))
+- Specific NPM library dependencies (see [package.json](package.json))
 - Plain /tmp directory (or use `--noincompatible_sandbox_hermetic_tmp` with bazel)
 
-## Running
+## Running locally
 
 TODO
+
+## Running on Kubernetes cluster
+
+TODO
+
+## Helm / Kubernetes
+
+Add and install from the repo:
+
+    helm repo add hblok https://hblok.github.io/cloud_tycoon
+
+    helm install hblok hblok/cloud-tycoon
+
+    
