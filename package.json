@@ -9,7 +9,7 @@
     "rollup-plugin-commonjs": "10.1.0",
     "@rollup/plugin-commonjs": "21.0.0",
     "fdir": "latest",
-    "mocha": "latest",
+    "mocha": "10.8.2",
     "assert": "latest",
     "jsdom": "22.0.0",
     "jquery": "latest"
