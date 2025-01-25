@@ -6,5 +6,10 @@ entries:
       home: https://github.com/hblok/cloud_tycoon
       name: cloud-tycoon
       version: 0.1.0
+      sources:
+        - https://hblok.github.io/cloud_tycoon
+      urls:
+        - cloud-tycoon-0.1.0.tgz
+        
       
       
