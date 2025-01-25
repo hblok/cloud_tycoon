@@ -1,19 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cloud-tycoon
   labels:
-    app: cloud-tycoon
-  
+    io.kompose.service: envoy-proxy
+  name: envoy-proxy
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: cloud-tycoon
+      io.kompose.service: envoy-proxy
+  strategy: {}
   template:
     metadata:
       labels:
-        app: cloud-tycoon
+        io.kompose.network/travel: "true"
+        io.kompose.service: envoy-proxy
     spec:
       containers:
         - image: ghcr.io/hblok/ct_envoy_distroless:v1.32
@@ -22,14 +23,8 @@ spec:
           ports:
             - containerPort: 12000
             - containerPort: 9901
-        - image: ghcr.io/hblok/ct_nginx_web:latest
-          name: nginx-web
-          imagePullPolicy: Always        
-        - image: ghcr.io/hblok/ct_travel_server:latest
-          name: travel-grpc
-          imagePullPolicy: Always
+          resources: {}
       imagePullSecrets:
         - name: regcred
-      restartPolicy: Always          
-
+      restartPolicy: Always
 status: {}
