@@ -36,7 +36,7 @@ jobs:
           key: bazel
 
       - name: Install dependencies
-        run: sudo apt-get install --allow-downgrades python3=3.11.2-1+b1
+        run: apt policy python3; sudo apt-get install --allow-downgrades python3=3.11.2-1+b1
         #sudo apt-get install -y graphviz
 
       - name: Print versions
