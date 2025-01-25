@@ -35,11 +35,11 @@ jobs:
           path: "~/.cache/bazel"
           key: bazel
 
-      - name: Install dependencies
-        run: sudo apt-get install -y graphviz
+#      - name: Install dependencies
+#        run: sudo apt-get install -y graphviz
 
-      - name: Bazel version
-        run: bazel --version
+      - name: Print versions
+        run: bazel --version; python3 --version
 
       - name: List rules
         run: bazel query ...
