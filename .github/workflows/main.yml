@@ -45,9 +45,8 @@ jobs:
           sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 2
           python3 --version
 
-#      - name: Install dependencies
-#        run: apt policy python3; sudo apt-get install --allow-downgrades python3=3.11.2-1+b1
-#        #sudo apt-get install -y graphviz
+      - name: Install dependencies
+        run: sudo apt-get install -y graphviz
 
       - name: Print versions
         run: bazel --version; python3 --version
