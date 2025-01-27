@@ -38,13 +38,13 @@ oci_image(
 oci_load(
     name = "load_nginx_web_native_registry",
     image = ":nginx_web_image",
-    repo_tags = ["nginx_web:v0.1.7"],
+    repo_tags = ["nginx_web:v0.1.8"],
 )
 
 oci_push(
     name = "push_nginx_web_github",
     image = ":nginx_web_image",
-    remote_tags = ["v0.1.7"],
+    remote_tags = ["v0.1.8"],
     repository = "ghcr.io/hblok/ct_nginx_web",
 )
 

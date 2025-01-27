@@ -13,7 +13,7 @@ spec:
         io.kompose.service: nginx-web
     spec:
       containers:
-        - image: ghcr.io/hblok/ct_nginx_web:v0.1.7
+        - image: ghcr.io/hblok/ct_nginx_web:v0.1.8
           name: nginx-web
           imagePullPolicy: Always
           resources: {}
