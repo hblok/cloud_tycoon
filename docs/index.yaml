@@ -21,11 +21,11 @@ entries:
       urls:
         - cloud-tycoon-0.1.4.tgz
         
-    - created: 2025-01-26T10:54:00+01:00
+    - created: 2025-01-26T13:54:00+01:00
       description: A full-stack web to cloud, web-grpc to Java distributed game.
       home: https://github.com/hblok/cloud_tycoon
       name: cloud-tycoon
-      version: 0.1.5
+      version: 0.1.6
       sources:
         - https://hblok.github.io/cloud_tycoon
       urls:
