@@ -17,7 +17,7 @@ spec:
         io.kompose.service: envoy-proxy
     spec:
       containers:
-        - image: ghcr.io/hblok/ct_envoy_distroless:v1.32
+        - image: ghcr.io/hblok/ct_envoy_distroless:{{.Values.envoy_distroless_version}}
           name: envoy-proxy
           imagePullPolicy: Always
           ports:
