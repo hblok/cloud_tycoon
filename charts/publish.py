@@ -14,8 +14,10 @@ HELM_INDEX = "github_pages/index.yaml"
 
 class Release:
 
-    def __init__(self, nginx_web_version):
-        self.nginx_web_version = nginx_web_version
+    def __init__(self, new_version):
+        self.helm_version = new_version
+        self.nginx_web_version = new_version
+        self.travel_server_version = new_version
         
         self.git_root = self._find_base_path()
 
@@ -48,7 +50,8 @@ class Release:
         path = self.git_root / HELM_VALUES
         
         values = self._read_yaml(path)
-        values["nginx_web_version"] = self.nginx_web_version
+        values["nginx_web_version"] = f"v{self.nginx_web_version}"
+        values["travel_server_version"] = f"v{self.travel_server_version}"
         self._write_yml(values, path)
 
     def update_repo_index(self):
@@ -58,9 +61,9 @@ class Release:
         entries = data["entries"]["cloud-tycoon"]
 
         new = copy.deepcopy(entries[0])
-        new["created"] = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S+01:00")
-        new["version"] = f"v{self.nginx_web_version}"
-        new["urls"][0] = f"cloud-tycoon-{self.nginx_web_version}.tgz"
+        new["created"] = datetime.datetime.now()
+        new["version"] = f"v{self.helm_version}"
+        new["urls"][0] = f"cloud-tycoon-{self.helm_version}.tgz"
         entries.append(new)
 
         self._pretty_json(data)
@@ -79,12 +82,13 @@ class Release:
             TAGS = l["TAGS"]
 
         TAGS["nginx_web_tag"] = f"v{self.nginx_web_version}"
+        TAGS["travel_server_tag"] = f"v{self.nginx_web_version}"
 
         with open(path, "w") as f:
             f.write("TAGS = " + str(TAGS) + "\n")
 
     def tar_gz(self):
-        tar_file = self.git_root / f"github_pages/cloud-tycoon-{self.nginx_web_version}.tgz"
+        tar_file = self.git_root / f"github_pages/cloud-tycoon-{self.helm_version}.tgz"
         subprocess.check_call(["tar", "zcvf", tar_file, "cloud-tycoon"], cwd=self.git_root / "charts")
 
     def _pretty_json(self, data):
@@ -97,12 +101,17 @@ class Release:
             return yaml.safe_load(f)
 
     def _write_yml(self, data, path):
+        def dt_format(_, data):
+            return data.strftime("%Y-%m-%dT%H:%M:%S+01:00")
+        
+        yaml.Dumper.add_representer(datetime.datetime, dt_format)
+        
         with open(path, "w") as f:
             yaml.dump(data, f)
     
 
 def main():
-    Release("0.1.10").update()
+    Release("0.1.11").update()
 
 
 if __name__ == "__main__":
