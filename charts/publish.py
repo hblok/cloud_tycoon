@@ -40,7 +40,7 @@ class Release:
 
     def update(self):
         self.update_repo_values()
-        #self.update_repo_index()
+        self.update_repo_index()
         self.update_docker()
         self.tar_gz()
 
@@ -58,7 +58,7 @@ class Release:
         entries = data["entries"]["cloud-tycoon"]
 
         new = copy.deepcopy(entries[0])
-        new["created"] = datetime.datetime.now()
+        new["created"] = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S+01:00")
         new["version"] = f"v{self.nginx_web_version}"
         new["urls"][0] = f"cloud-tycoon-{self.nginx_web_version}.tgz"
         entries.append(new)
@@ -102,8 +102,7 @@ class Release:
     
 
 def main():
-    #Release("v0.1.9").read()
-    Release("0.1.9").update()
+    Release("0.1.10").update()
 
 
 if __name__ == "__main__":

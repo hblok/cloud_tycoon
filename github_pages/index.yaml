@@ -1,7 +1,7 @@
 apiVersion: v1
 entries:
   cloud-tycoon:
-  - created: 2025-01-26 14:11:00+01:00
+  - created: 2025-01-26T14:11:00+01:00
     description: A full-stack web to cloud, web-grpc to Java distributed game.
     home: https://github.com/hblok/cloud_tycoon
     name: cloud-tycoon
@@ -19,3 +19,12 @@ entries:
     urls:
     - cloud-tycoon-0.1.9.tgz
     version: v0.1.9
+  - created: '2025-01-31T16:54:05+01:00'
+    description: A full-stack web to cloud, web-grpc to Java distributed game.
+    home: https://github.com/hblok/cloud_tycoon
+    name: cloud-tycoon
+    sources:
+    - https://hblok.github.io/cloud_tycoon
+    urls:
+    - cloud-tycoon-0.1.10.tgz
+    version: v0.1.10
