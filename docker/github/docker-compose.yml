@@ -7,7 +7,7 @@ services:
       
   nginx-web:
     container_name: nginx-web
-    image: "ghcr.io/hblok/ct_nginx_web:v0.1.8"
+    image: "ghcr.io/hblok/ct_nginx_web:latest"
     networks:
       - travel
       

@@ -1,3 +1,4 @@
+load(":variables.bzl", "TAGS")
 load("@rules_multirun//:defs.bzl", "command", "multirun")
 load("@rules_oci//oci:defs.bzl", "oci_image", "oci_load", "oci_push")
 
@@ -38,13 +39,13 @@ oci_image(
 oci_load(
     name = "load_nginx_web_native_registry",
     image = ":nginx_web_image",
-    repo_tags = ["nginx_web:v0.1.8"],
+    repo_tags = ["nginx_web:" + TAGS["nginx_web_tag"]],
 )
 
 oci_push(
     name = "push_nginx_web_github",
     image = ":nginx_web_image",
-    remote_tags = ["v0.1.8"],
+    remote_tags = [TAGS["nginx_web_tag"], "latest"],
     repository = "ghcr.io/hblok/ct_nginx_web",
 )
 
