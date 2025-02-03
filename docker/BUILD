@@ -18,13 +18,13 @@ oci_image(
 oci_load(
     name = "load_travel_server_native_registry",
     image = ":travel_server_image",
-    repo_tags = ["travel_server:latest"],
+    repo_tags = ["travel_server:" + TAGS["travel_server_tag"]],
 )
 
 oci_push(
     name = "push_travel_server_github",
     image = ":travel_server_image",
-    remote_tags = ["latest"],
+    remote_tags = [TAGS["travel_server_tag"], "latest"],
     repository = "ghcr.io/hblok/ct_travel_server",
 )
 

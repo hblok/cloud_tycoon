@@ -113,7 +113,7 @@ class Release:
     
 
 def main():
-    Release("0.1.11").update()
+    Release("0.1.12").update()
 
 
 if __name__ == "__main__":
