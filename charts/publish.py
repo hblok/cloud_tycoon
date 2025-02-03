@@ -101,8 +101,10 @@ class Release:
             return yaml.safe_load(f)
 
     def _write_yml(self, data, path):
-        def dt_format(_, data):
-            return data.strftime("%Y-%m-%dT%H:%M:%S+01:00")
+        def dt_format(dumper, data):
+            print(data)
+            print(dumper)
+            return dumper.represent_str(data.strftime("%Y-%m-%dT%H:%M:%S+01:00"))
         
         yaml.Dumper.add_representer(datetime.datetime, dt_format)
         
