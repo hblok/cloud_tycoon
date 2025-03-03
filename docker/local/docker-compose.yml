@@ -1,13 +1,13 @@
 services:
   travel-grpc:
     container_name: travel-grpc
-    image: "travel_server:latest"
+    image: "travel_server:v0.1.12"
     networks:
       - travel
       
   nginx-web:
     container_name: nginx-web
-    image: "nginx_web:latest"
+    image: "nginx_web:v0.1.12"
     networks:
       - travel
       
@@ -17,6 +17,27 @@ services:
       - travel
     ports:
       - 12000:12000
+
+  alloy:
+    image: grafana/alloy:v1.3.1
+    container_name: alloy
+    ports:
+      - "22345:12345"
+    volumes:
+      - "./config.alloy:/etc/alloy/config.alloy"
+
+      - "/sys:/sys:ro"
+      - "/var/lib/docker/:/var/lib/docker:ro"
+      - /var/run/docker.sock:/var/run/docker.sock
+      
+    command: [
+    "run",
+    "--server.http.listen-addr=0.0.0.0:12345",
+    "--stability.level=public-preview",
+    "/etc/alloy/config.alloy",
+    ]
+    networks:
+      - travel
 
 
 networks:
