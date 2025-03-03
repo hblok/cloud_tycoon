@@ -25,6 +25,7 @@ services:
       - "22345:12345"
     volumes:
       - "./config.alloy:/etc/alloy/config.alloy"
+      - "./auth.json:/etc/alloy/auth.json"
 
       - "/sys:/sys:ro"
       - "/var/lib/docker/:/var/lib/docker:ro"

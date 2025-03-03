@@ -1,0 +1,64 @@
+
+//logging {
+//  level = "warn"
+//}
+
+local.file "endpoints" {
+  filename = "/etc/alloy/auth.json"
+}
+
+
+// Metrics
+
+prometheus.exporter.cadvisor "docker" {
+  store_container_labels = true
+  docker_only = true
+}
+
+prometheus.scrape "docker" {
+  targets    = prometheus.exporter.cadvisor.docker.targets
+  forward_to = [prometheus.remote_write.obs.receiver]
+
+  scrape_interval = "10s"
+  honor_labels = true
+}
+
+prometheus.remote_write "obs" {
+  endpoint {
+    url = "http://" + json_path(local.file.endpoints.content, ".prometheus")[0] + "/api/v1/write"
+
+    basic_auth {
+      username = json_path(local.file.endpoints.content, ".user")[0]
+      password = json_path(local.file.endpoints.content, ".prompass")[0]
+    }
+  }
+}
+
+
+// Traces
+
+
+
+// Logs
+
+discovery.docker "sock" {
+  host = "unix:///var/run/docker.sock"
+}
+
+loki.source.docker "sock" {
+  host       = "unix:///var/run/docker.sock"
+  targets    = discovery.docker.sock.targets
+  labels     = {"app" = "docker"}
+  forward_to = [loki.write.obs.receiver]
+}
+
+loki.write "obs" {
+  endpoint {
+    url = "http://" + json_path(local.file.endpoints.content, ".loki")[0] + "/loki/api/v1/push"
+    basic_auth {
+      username = json_path(local.file.endpoints.content, ".user")[0]
+      password = json_path(local.file.endpoints.content, ".lokipass")[0]
+    }
+  }
+  external_labels = {}
+}
